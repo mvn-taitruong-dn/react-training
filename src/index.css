@@ -40,6 +40,9 @@ ul li {
 .header-nav li {
   padding: 20px 20px;
 }
+.header-nav li a:hover {
+  color: green;
+}
 .header-nav a {
   color: black;
   text-decoration: none;
@@ -55,6 +58,41 @@ ul li {
 .app-logo {
   width: 400px;
 }
+.cricle {
+  margin: 10px 20px;
+}
+.countdown button {
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  vertical-align: middle;
+  background-color: #198754;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  padding: 6px 10px;
+}
+.navigator {
+  padding: 20px;
+}
+.navigator button {
+  margin: auto 10px;
+  color: white;
+  background-color: lightsalmon;
+  text-transform: uppercase;
+  padding: 10px 10px;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+.navigator button:hover {
+  background-color: lightcoral;
+}
+.navigator button:active {
+  background-color: lightcoral;
+}
+.active-buton {
+}
 /* Footer */
 .page-footer {
   border-top: 1px solid gray;
@@ -65,12 +103,45 @@ ul li {
   display: flex;
 }
 .flex-center {
-  display: flex;
   justify-content: center;
+  align-items: center;
+}
+.flex-center-align {
+  align-items: center;
+}
+.flex-center-justify-content {
+  justify-content: center;
+}
+.flex-column {
+  flex-direction: column;
 }
 .justify-between {
   justify-content: space-between;
 }
 .text-center {
   text-align: center;
+}
+.btn {
+  pointer-events: none;
+  filter: none;
+  opacity: 0.65;
+}
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  color: #212529;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  vertical-align: middle;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
 }
