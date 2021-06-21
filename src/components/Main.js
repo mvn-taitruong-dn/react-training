@@ -3,6 +3,7 @@ import Cricle from "./Cricle";
 import React, { Component } from "react";
 import CountDown from "./CountDown";
 import Navigate from "./Navigate";
+import Item from "./Item";
 
 class Main extends Component {
   constructor(props) {
@@ -29,6 +30,38 @@ class Main extends Component {
         },
       ],
       currentPage: "home",
+      items: [
+        {
+          color: "red",
+          title: "This is title 1",
+          subTitle: "Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+        },
+        {
+          color: "yellow",
+          title: "This is title 2",
+          subTitle: "Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+        },
+        {
+          color: "green",
+          title: "This is title 3",
+          subTitle: "Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+        },
+        {
+          color: "blue",
+          title: "This is title 4",
+          subTitle: "Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+        },
+        {
+          color: "dodgerblue",
+          title: "This is title 5",
+          subTitle: "Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+        },
+        {
+          color: "hotpink",
+          title: "This is title 6",
+          subTitle: "Lorem ipsum dolor, sit amet consectetur adipisicing elit.",
+        },
+      ],
     };
   }
 
@@ -45,9 +78,16 @@ class Main extends Component {
       currentPage: page,
     });
   };
+  handleRemoveItem = (index) => {
+    const { items } = this.state;
+    items.splice(index, 1);
+    this.setState({
+      items,
+    });
+  };
 
   render() {
-    const { cricles, currentPage } = this.state;
+    const { cricles, currentPage, items } = this.state;
     const elemnetCricles = cricles.map((cricle, index) => {
       return (
         <CountDown
@@ -61,11 +101,29 @@ class Main extends Component {
         />
       );
     });
+
     const aboutPage = (
       <div>
         <h2>About</h2>
       </div>
     );
+
+    const elementItems = items.map((item, index) => {
+      return (
+        <Item
+          key={index}
+          item={item}
+          index={index}
+          handleRemoveItem={this.handleRemoveItem}
+        />
+      );
+    });
+    const itemsPage =
+      items.length === 0 ? (
+        <h3>Empty Item</h3>
+      ) : (
+        <ul className="items">{elementItems}</ul>
+      );
 
     return (
       <main className="page-main">
@@ -73,7 +131,9 @@ class Main extends Component {
           <div className="main-content flex flex-center flex-column">
             <Navigate selectPage={this.selectPage} />
             <div className="flex">
-              {currentPage === "home" ? elemnetCricles : aboutPage}
+              {currentPage === "home" && elemnetCricles}
+              {currentPage === "about" && aboutPage}
+              {currentPage === "items" && itemsPage}
             </div>
           </div>
         </div>
