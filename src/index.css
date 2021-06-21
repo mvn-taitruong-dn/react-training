@@ -11,6 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+h3,
+p {
+  margin: 0;
+}
 ul li {
   list-style: none;
   padding: 0;
@@ -91,7 +96,32 @@ ul li {
 .navigator button:active {
   background-color: lightcoral;
 }
-.active-buton {
+.item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100px;
+}
+.item-background {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+}
+.item-content {
+  width: 400px;
+  justify-self: stretch;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 10px;
+}
+.item-title {
+  margin-bottom: 5px;
+}
+.item-subTitle {
+  font-size: 12px;
+}
+.ic_delete {
+  justify-self: flex-start;
 }
 /* Footer */
 .page-footer {
