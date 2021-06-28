@@ -53,6 +53,11 @@ class FormRegister extends Component {
       },
     });
   };
+  handleRemoveUser = (id) => {
+    this.setState((prev) => ({
+      users: prev.users.filter((user) => user.id !== id),
+    }));
+  };
   render() {
     const { form, users } = this.state;
 
@@ -153,7 +158,11 @@ class FormRegister extends Component {
             </thead>
             <tbody>
               {users.map((user, index) => (
-                <UserRow key={index} user={user} />
+                <UserRow
+                  key={index}
+                  user={user}
+                  remove={this.handleRemoveUser}
+                />
               ))}
             </tbody>
           </table>

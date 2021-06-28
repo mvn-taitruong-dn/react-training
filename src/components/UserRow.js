@@ -12,7 +12,9 @@ class UserRow extends Component {
         <td>{<input type="checkbox" name="status" checked={user.status} />}</td>
         <td>{user.info}</td>
         <td>
-          <button className="">X</button>
+          <button className="" onClick={() => this.props.remove(user.id)}>
+            X
+          </button>
         </td>
       </tr>
     );
