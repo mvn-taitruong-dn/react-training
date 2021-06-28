@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import CountDown from "./CountDown";
 import Navigate from "./Navigate";
 import Item from "./Item";
+import FormRegister from "./FormRegister";
 
 class Main extends Component {
   constructor(props) {
@@ -130,10 +131,11 @@ class Main extends Component {
         <div className="container">
           <div className="main-content flex flex-center flex-column">
             <Navigate selectPage={this.selectPage} />
-            <div className="flex">
+            <div className="flex width-100">
               {currentPage === "home" && elemnetCricles}
               {currentPage === "about" && aboutPage}
               {currentPage === "items" && itemsPage}
+              {currentPage === "forms" && <FormRegister />}
             </div>
           </div>
         </div>

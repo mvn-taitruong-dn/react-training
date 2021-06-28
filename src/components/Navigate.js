@@ -16,6 +16,9 @@ class Navigate extends Component {
         <button type="button" onClick={() => this.selectPage("items")}>
           Items
         </button>
+        <button type="button" onClick={() => this.selectPage("forms")}>
+          Forms
+        </button>
       </div>
     );
   }

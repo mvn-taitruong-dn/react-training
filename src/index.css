@@ -6,6 +6,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+* {
+  box-sizing: border-box;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -96,6 +99,7 @@ ul li {
 .navigator button:active {
   background-color: lightcoral;
 }
+/* Ex-3 List Item */
 .item {
   display: flex;
   justify-content: flex-start;
@@ -123,6 +127,78 @@ ul li {
 .ic_delete {
   justify-self: flex-start;
 }
+/* Register Form  */
+input[type="password"],
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+  border: 1px solid transparent;
+  background: #fff;
+  border-radius: 4px;
+  height: 36px;
+  width: 100%;
+  padding: 10px;
+}
+input[type="password"]:hover,
+input[type="text"]:hover,
+input[type="tel"]:hover,
+input[type="number"]:hover,
+select:hover,
+textarea:hover {
+  border: 1.5px solid #3c9ccb;
+}
+textarea {
+  height: 100px;
+}
+.form-group > label {
+  color: white;
+  display: block;
+  margin-bottom: 5px;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+/* Radio */
+.radio-group > label {
+  color: white;
+  margin-right: 10px;
+}
+
+.form-register h2 {
+  color: white;
+  text-transform: uppercase;
+}
+.form-register {
+  padding: 20px;
+  padding-top: 0;
+  border-radius: 8px;
+  text-align: left;
+  background: linear-gradient(to top right, #3c9ccb, #85caba);
+  margin-bottom: 20px;
+  margin-right: 20px;
+  width: 30%;
+}
+/* Table  */
+
+table {
+  border-collapse: collapse;
+}
+table thead {
+  background-color: #85caba;
+  color: #fff;
+  text-transform: uppercase;
+}
+table th,
+table td {
+  border: 1px solid white;
+  padding: 10px;
+  text-align: center;
+}
+table tbody {
+  background: linear-gradient(to top, #3c9ccb, #85caba);
+}
+
 /* Footer */
 .page-footer {
   border-top: 1px solid gray;
@@ -152,11 +228,6 @@ ul li {
   text-align: center;
 }
 .btn {
-  pointer-events: none;
-  filter: none;
-  opacity: 0.65;
-}
-.btn {
   display: inline-block;
   font-weight: 400;
   color: #212529;
@@ -174,4 +245,16 @@ ul li {
   color: #fff;
   background-color: #0d6efd;
   border-color: #0d6efd;
+}
+.btn-outline-primary {
+  padding: 10px;
+  background: transparent;
+  font-weight: bold;
+  border: 1px solid white;
+  color: white;
+  width: 100%;
+  border-radius: 4px;
+}
+.width-100 {
+  width: 100%;
 }
