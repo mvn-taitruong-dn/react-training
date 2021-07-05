@@ -2,17 +2,20 @@ import React, { useState } from "react";
 import UserRow from "./UserRow";
 
 let id = 0;
+const INIT_FORM = {
+  email: "",
+  password: "",
+  country: "",
+  gender: "",
+  status: false,
+  info: "",
+};
 function FormRegister() {
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-    country: "",
-    gender: "",
-    status: false,
-    info: "",
-  });
+  const [form, setForm] = useState(INIT_FORM);
 
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(
+    JSON.parse(localStorage.getItem("users")) || []
+  );
 
   function handleChange(event) {
     const target = event.target;
@@ -23,38 +26,33 @@ function FormRegister() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    let newUsers = null;
     if (form.id) {
-      setUsers(users.map((user) => (user.id == form.id ? form : user)));
+      newUsers = users.map((user) => (user.id === form.id ? form : user));
     } else {
       id += 1;
       const user = { ...form, id };
-      setUsers([...users, user]);
+      newUsers = [...users, user];
     }
+    setUsersLocal(newUsers);
     clearFormState();
   }
 
   function handleRemoveUser(id) {
-    setUsers(users.filter((user) => user.id !== id));
+    setUsersLocal(users.filter((user) => user.id !== id));
     clearFormState();
   }
+
   function handleUpdateUser(id) {
     setForm(users.find((user) => user.id === id));
   }
+
   function clearFormState() {
-    setForm({
-      email: "",
-      password: "",
-      country: "",
-      gender: "",
-      status: false,
-      info: "",
-    });
+    setForm(INIT_FORM);
   }
-  function findUserBy(id) {
-    users.filter((user) => user.id === id);
-  }
+
   function handleChangeStatus(id, status) {
-    setUsers(
+    setUsersLocal(
       users.map((user) => {
         if (user.id === id) {
           user.status = status;
@@ -62,6 +60,10 @@ function FormRegister() {
         return user;
       })
     );
+  }
+  function setUsersLocal(newUsers) {
+    setUsers(newUsers);
+    localStorage.setItem("users", JSON.stringify(newUsers));
   }
 
   return (
