@@ -9,6 +9,9 @@ body {
 * {
   box-sizing: border-box;
 }
+i {
+  cursor: pointer;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -195,8 +198,27 @@ table td {
   padding: 10px;
   text-align: center;
 }
-table tbody {
+table tbody tr {
   background: linear-gradient(to top, #3c9ccb, #85caba);
+}
+tbody tr:nth-of-type(even) {
+  background: linear-gradient(to bottom, #3c9ccb, #85caba);
+}
+tbody tr:nth-of-type(2) {
+  text-align: left;
+}
+thead > tr:last-of-type > th:nth-of-type(1),
+thead > tr:last-of-type > th:nth-of-type(2) {
+  width: 82px;
+}
+tbody tr td:nth-of-type(2),
+tbody tr td:nth-of-type(6) {
+  text-align: left;
+
+  max-width: 400px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 /* Footer */

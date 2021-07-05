@@ -1,175 +1,178 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import UserRow from "./UserRow";
 
-class FormRegister extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      form: {
-        id: "",
-        email: "",
-        password: "",
-        country: "",
-        gender: null,
-        status: false,
-        info: "",
-      },
-      users: [],
-    };
-    this.id = 0;
-  }
-  handleChange = (event) => {
+let id = 0;
+const INIT_FORM = {
+  email: "",
+  password: "",
+  country: "",
+  gender: "",
+  status: false,
+  info: "",
+};
+function FormRegister() {
+  const [form, setForm] = useState(INIT_FORM);
+
+  const [users, setUsers] = useState(
+    JSON.parse(localStorage.getItem("users")) || []
+  );
+
+  function handleChange(event) {
     const target = event.target;
     const name = target.name;
     const value = target.type === "checkbox" ? target.checked : target.value;
-    this.setState((preState) => ({
-      form: {
-        ...preState.form,
-        [name]: value,
-      },
-    }));
-  };
-  handleSubmit = (event) => {
+    setForm({ ...form, [name]: value });
+  }
+
+  function handleSubmit(event) {
     event.preventDefault();
-    const { form } = this.state;
-    const { id } = this;
-    this.id = id + 1;
-    const user = { ...form, id: this.id };
-    this.clearFormState();
-    this.setState((preState) => ({
-      users: [user, ...preState.users],
-    }));
-  };
+    let newUsers = null;
+    if (form.id) {
+      newUsers = users.map((user) => (user.id === form.id ? form : user));
+    } else {
+      id += 1;
+      const user = { ...form, id };
+      newUsers = [...users, user];
+    }
+    setUsersLocal(newUsers);
+    clearFormState();
+  }
 
-  clearFormState = () => {
-    this.setState({
-      form: {
-        email: "",
-        password: "",
-        country: "",
-        gender: null,
-        status: false,
-        info: "",
-      },
-    });
-  };
-  handleRemoveUser = (id) => {
-    this.setState((prev) => ({
-      users: prev.users.filter((user) => user.id !== id),
-    }));
-  };
-  render() {
-    const { form, users } = this.state;
+  function handleRemoveUser(id) {
+    setUsersLocal(users.filter((user) => user.id !== id));
+    clearFormState();
+  }
 
-    return (
-      <>
-        <form className="form-register" onSubmit={this.handleSubmit}>
-          <h2>Register</h2>
-          <div className="form-group">
-            <label>Email address</label>
-            <input
-              type="text"
-              name="email"
-              value={form.email}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="form-group">
-            <label>Your country </label>
-            <select
-              onChange={this.handleChange}
-              name="country"
-              value={form.country}
-            >
-              <option value="">Please Choose</option>
-              <option value="Viet Nam">Viet Nam</option>
-              <option value="USA">USA</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label>Gender</label>
-            <div className="radio-group">
-              <input
-                type="radio"
-                value="0"
-                defaultChecked={form.gender === "0"}
-                name="gender"
-                onChange={this.handleChange}
-              />
-              <label>Male</label>
+  function handleUpdateUser(id) {
+    setForm(users.find((user) => user.id === id));
+  }
 
-              <input
-                type="radio"
-                value="1"
-                defaultChecked={form.gender === "1"}
-                name="gender"
-                onChange={this.handleChange}
-              />
-              <label>Female</label>
-            </div>
-          </div>
-          <div className="form-group">
-            <label>Status</label>
-            <input
-              type="checkbox"
-              name="status"
-              onChange={this.handleChange}
-              defaultChecked={form.status}
-            />
-          </div>
-          <div className="form-group">
-            <label>Other Information</label>
-            <textarea
-              name="info"
-              value={form.info}
-              onChange={this.handleChange}
-            ></textarea>
-          </div>
-          <div className="buttons-set">
-            <button
-              className="btn btn-outline-primary"
-              onSubmit={this.handleSubmit}
-            >
-              Submit
-            </button>
-          </div>
-        </form>
-        <div className="user-list">
-          <table>
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Email Address</th>
-                <th>Country</th>
-                <th>Gender</th>
-                <th>Status</th>
-                <th>Other Information</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((user, index) => (
-                <UserRow
-                  key={index}
-                  user={user}
-                  remove={this.handleRemoveUser}
-                />
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </>
+  function clearFormState() {
+    setForm(INIT_FORM);
+  }
+
+  function handleChangeStatus(id, status) {
+    setUsersLocal(
+      users.map((user) => {
+        if (user.id === id) {
+          user.status = status;
+        }
+        return user;
+      })
     );
   }
-}
+  function setUsersLocal(newUsers) {
+    setUsers(newUsers);
+    localStorage.setItem("users", JSON.stringify(newUsers));
+  }
 
+  return (
+    <>
+      <form className="form-register" onSubmit={handleSubmit}>
+        <h2>{form.id ? "Update" : "Register"}</h2>
+        <div className="form-group">
+          <label>Email address</label>
+          <input
+            type="text"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            value={form.password}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label>Your country </label>
+          <select onChange={handleChange} name="country" value={form.country}>
+            <option value="">Please Choose</option>
+            <option value="Viet Nam">Viet Nam</option>
+            <option value="USA">USA</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <label>Gender</label>
+          <div className="radio-group">
+            <input
+              key="raido0"
+              type="radio"
+              value="0"
+              checked={form.gender === "0"}
+              name="gender"
+              onChange={handleChange}
+            />
+            <label>Male</label>
+            <input
+              key="radio1"
+              type="radio"
+              value="1"
+              checked={form.gender === "1"}
+              name="gender"
+              onChange={handleChange}
+            />
+            <label>Female</label>
+          </div>
+        </div>
+        <div className="form-group">
+          <label>Status</label>
+          <input
+            type="checkbox"
+            name="status"
+            onChange={handleChange}
+            checked={form.status}
+          />
+        </div>
+        <div className="form-group">
+          <label>Other Information</label>
+          <textarea
+            name="info"
+            value={form.info}
+            onChange={handleChange}
+          ></textarea>
+        </div>
+        <div className="buttons-set">
+          <button className="btn btn-outline-primary">
+            {form.id ? "Update" : "Submit"}
+          </button>
+        </div>
+      </form>
+      <div className="user-list">
+        <table>
+          <thead>
+            <tr>
+              <th rowSpan="2">Id</th>
+              <th rowSpan="2">Email Address</th>
+              <th rowSpan="2">Country</th>
+              <th rowSpan="2">Gender</th>
+              <th rowSpan="2">Status</th>
+              <th rowSpan="2">Other Information</th>
+              <th colSpan="2">Action</th>
+            </tr>
+            <tr>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <UserRow
+                key={user.id}
+                user={user}
+                remove={handleRemoveUser}
+                update={handleUpdateUser}
+                handleChangeStatus={handleChangeStatus}
+              />
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  );
+}
 export default FormRegister;
