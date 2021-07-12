@@ -5,6 +5,7 @@ import CountDown from "./CountDown";
 import Navigate from "./Navigate";
 import Item from "./Item";
 import FormRegister from "./FormRegister";
+import UserList from "./UserList";
 
 class Main extends Component {
   constructor(props) {
@@ -129,13 +130,14 @@ class Main extends Component {
     return (
       <main className="page-main">
         <div className="container">
-          <div className="main-content flex flex-center flex-column">
+          <div className="main-content">
             <Navigate selectPage={this.selectPage} />
-            <div className="flex width-100">
+            <div className="flex width-100 flex-column flex-center">
               {currentPage === "home" && elemnetCricles}
               {currentPage === "about" && aboutPage}
               {currentPage === "items" && itemsPage}
               {currentPage === "forms" && <FormRegister />}
+              {currentPage === "users" && <UserList />}
             </div>
           </div>
         </div>

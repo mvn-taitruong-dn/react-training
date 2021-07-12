@@ -9,7 +9,7 @@ body {
 * {
   box-sizing: border-box;
 }
-i {
+i, button{
   cursor: pointer;
 }
 
@@ -219,6 +219,48 @@ tbody tr td:nth-of-type(6) {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+
+.avatar{
+  width: 40px;
+  height: 40px;
+  margin: auto;
+}
+
+.avatar >img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.pagination{
+  display: block;
+  margin: 10px;
+  padding: 0;
+}
+.pagination-item{
+  display: inline-block;
+  padding: 15px 10px;
+  
+}
+.pagination-item button{
+  color: #212529;
+  background-color: #fff;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+
+}
+
+button:disabled,
+button[disabled]{
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.pagination-item .active{
+  background-color: #4CAF50;
+  color: white;
 }
 
 /* Footer */
