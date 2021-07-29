@@ -1,0 +1,17 @@
+.product-item {
+    margin-bottom: 20px;
+    img{
+        width: 100%;
+    }
+    .product-name{
+        margin: 10px 0;
+        font-size: 17px;
+    }
+    .product-desc {
+        margin-top: 0;
+    }
+    .product-action{
+        font-size: 15px;
+        text-transform: uppercase;
+    }
+}

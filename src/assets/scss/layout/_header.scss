@@ -1,0 +1,54 @@
+.page-header {
+    background: #222;
+
+    .container {
+        display: flex;
+        align-items: center;
+    }
+
+    .header-account {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+
+        li {
+            margin-left: 20px;
+        }
+
+        a {
+            color: #fff;
+            font-size: 18px;
+        }
+
+        svg {
+            display: block;
+        }
+    }
+
+    .logo {
+        img {
+            width: 60px;
+        }
+    }
+}
+
+.page-nav {
+    a {
+        display: block;
+        padding: 10px;
+        color: #fff;
+        font-size: 18px;
+
+        &.active {
+            color: rgb(37, 219, 255);
+        }
+    }
+
+    ul {
+        display: flex;
+    }
+
+    li {
+        margin-left: 10px;
+    }
+}
